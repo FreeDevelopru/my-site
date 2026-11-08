@@ -1,0 +1,547 @@
+/* ==========================================================================
+   1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================================================== */
+
+:root {
+  /* Цвета */
+  --color-primary: #2563eb;        /* Основной синий (кнопки, акценты) */
+  --color-primary-dark: #1e40af;   /* Темнее для наведения */
+  --color-bg: #f8fafc;             /* Светло-серый фон сайта */
+  --color-bg-alt: #ffffff;         /* Белый для карточек */
+  --color-text: #1e293b;           /* Основной текст (темно-серый) */
+  --color-text-muted: #64748b;     /* Второстепенный текст */
+  --color-border: #e2e8f0;         /* Границы */
+
+  /* Шрифты */
+  --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Отступы (внутренние) */
+  --container-width: 1140px;
+  --section-padding: 80px 0;
+}
+
+/* Сброс стандартных стилей браузера */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* Плавная прокрутка при клике на якорные ссылки */
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6; /* Межстрочный интервал для читаемости */
+  font-size: 16px;
+}
+
+/* Убираем подчеркивание у всех ссылок по умолчанию */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Убираем маркеры у списков (мы сами их стилизуем) */
+ul {
+  list-style: none;
+}
+
+/* Картинки не должны вылезать за пределы контейнера */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   2. СЕТКА (КОНТЕЙНЕР)
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px; /* Отступы по бокам для мобильных */
+}
+
+/* ==========================================================================
+   3. ТИПОГРАФИКА (ЗАГОЛОВКИ)
+   ========================================================================== */
+
+.section-title {
+  font-size: 2rem;         /* 32px */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto 48px auto; /* Центрируем и даем отступ снизу */
+}
+
+/* ==========================================================================
+   4. ШАПКА (HEADER)
+   ========================================================================== */
+
+.header {
+  background-color: var(--color-bg-alt); /* Белый фон */
+  border-bottom: 1px solid var(--color-border);
+  position: sticky; /* Шапка "прилипает" к верху при прокрутке */
+  top: 0;
+  z-index: 100; /* Чтобы шапка была поверх остального контента */
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px; /* Фиксированная высота шапки */
+}
+
+/* Логотип */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Расстояние между картинкой и текстом */
+}
+
+.logo__img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain; /* На всякий случай, чтобы логотип не искажался */
+}
+
+.logo__text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Навигация */
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav__link {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease; /* Плавное изменение цвета при наведении */
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   5. КНОПКИ (ОБЩИЕ СТИЛИ)
+   ========================================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 8px; /* Скругленные углы */
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent; /* Чтобы при наведении не было скачков размера */
+}
+
+/* Основная кнопка (синяя) */
+.btn--primary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px); /* Легкий подъем при наведении */
+}
+
+/* Кнопка-контур (прозрачная с обводкой) */
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* Кнопка в шапке (чуть меньше) */
+.btn--header {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   6. HERO-БЛОК (ГЛАВНЫЙ ЭКРАН)
+   ========================================================================== */
+
+.hero {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-bg) 100%);
+}
+
+.hero__content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 3rem; /* 48px */
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.hero__title-accent {
+  color: var(--color-primary);
+}
+
+.hero__subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap; /* Кнопки перенесутся на новую строку, если не влезут */
+}
+
+.hero__note {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  background: #fff;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   7. БЛОК УСЛУГ (SERVICES)
+   ========================================================================== */
+
+.services {
+  padding: var(--section-padding);
+  background-color: var(--color-bg-alt); /* Белый фон, чтобы выделить блок */
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Адаптивная сетка */
+  gap: 24px;
+}
+
+.service-card {
+  background: var(--color-bg);
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.service-card__title {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.service-card__list li {
+  display: flex;
+  justify-content: space-between; /* Текст слева, цена справа */
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--color-border);
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.service-card__list li:last-child {
+  border-bottom: none;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap; /* Цена не переносится на новую строку */
+  margin-left: 10px;
+}
+
+/* ==========================================================================
+   8. БЛОК "ОБО МНЕ" (ABOUT)
+   ========================================================================== */
+
+.about {
+  padding: var(--section-padding);
+}
+
+.about__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about__text p {
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+}
+
+.about__text strong {
+  color: var(--color-text);
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.stat {
+  background: var(--color-bg-alt);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.stat__number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.stat__label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   9. БЛОК "ПОЛЕЗНОЕ" (USEFUL)
+   ========================================================================== */
+
+.useful {
+  padding: var(--section-padding);
+  background-color: var(--color-bg-alt);
+}
+
+.useful__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.useful-card {
+  display: block;
+  background: var(--color-bg);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.useful-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-color: var(--color-primary);
+}
+
+/* ВОТ ЭТО ПРАВИЛО СТАВИТ ИКОНКУ И ТЕКСТ В ОДНУ СТРОКУ */
+.useful-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.useful-card__icon {
+  flex-shrink: 0; /* Иконка не сжимается, если текст длинный */
+  width: 40px;
+  height: 40px;
+}
+
+.useful-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* На случай, если картинка не квадратная */
+}
+
+.useful-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.useful-card__desc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.useful-card__link {
+  font-weight: 600;
+  color: var(--color-primary);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   10. ПОДВАЛ (FOOTER)
+   ========================================================================== */
+
+.footer {
+  background-color: #1e293b; /* Темный фон */
+  color: #cbd5e1;
+  padding: 64px 0 32px 0;
+}
+
+.footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer .logo__text {
+  color: #fff;
+}
+
+.footer__desc {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  max-width: 300px;
+}
+
+.footer__title {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.footer__list li {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.footer__list a {
+  transition: color 0.2s ease;
+}
+
+.footer__list a:hover {
+  color: #fff;
+}
+
+.footer__bottom {
+  border-top: 1px solid #334155;
+  padding-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.footer__bottom p {
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   11. АДАПТИВНОСТЬ (МОБИЛЬНЫЕ)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hero__title {
+    font-size: 2.2rem;
+  }
+  .about__content {
+    grid-template-columns: 1fr; /* На планшетах текст и цифры друг под другом */
+  }
+  .footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .header__inner {
+    flex-direction: column;
+    height: auto;
+    padding: 16px 0;
+    gap: 16px;
+  }
+  .nav {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero__actions {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+  .footer__inner {
+    grid-template-columns: 1fr;
+  }
+  .about__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   12. ФИНАЛЬНАЯ ПОЛИРОВКА
+   ========================================================================== */
+
+/* 1. Отступ для якорных ссылок (чтобы заголовок не прятался под шапкой) */
+section[id] {
+  scroll-margin-top: 80px; /* Высота шапки + небольшой запас */
+}
+
+/* 2. Красивое выделение текста мышкой */
+::selection {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+/* 3. Видимый фокус для тех, кто пользуется клавиатурой (Tab) */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 4. Плавное появление картинок при загрузке (мелочь, но приятно) */
+img {
+  transition: opacity 0.3s ease;
+}
